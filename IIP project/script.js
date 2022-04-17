@@ -11,7 +11,7 @@ const country_element = document.getElementById('country');
 const weather_forecast_element = document.getElementById('weather_forecast');
 const current_temp_element = document.getElementById('current_temp');
 
-const days = ['Sunday', 'Monday' ,'Tuesday' , 'Wednesday' , 'Thrusday' , 'Friday' , 'Saturday'];
+const days = ['Sunday', 'Monday' ,'Tuesday' , 'Wednesday' , 'Thursday' , 'Friday' , 'Saturday'];
 const months = ['Jan', 'Feb' , 'Mar' , 'Apr' , 'May' , 'Jun' , 'Jul', 'Aug' , 'Sep' , 'Oct' , 'Nov' , 'Dec'] ;
 
 setInterval(() => {
@@ -19,13 +19,15 @@ setInterval(() => {
     const month = time.getMonth();
     const date = time.getDate();
     const day = time.getDay();
-    const hour = time.getHours();       //return 24hr format
-    const hours_12hrs_format = hour >= 13 ? hour%12 : hour; //converting to 12hr format
+    var hour = time.getHours();       //return 24hr format
+    // hour = hour<10?'0'+hour : hour;
+    var hours_12hrs_format = hour >= 13 ? hour%12 : hour; //converting to 12hr format
+    hours_12hrs_format = (hours_12hrs_format < 10) ? '0' + hours_12hrs_format : hours_12hrs_format;
     const ampm = hour >= 12 ? 'PM' : 'AM' ;
     let minute = time.getMinutes();
     minute = (minute < 10) ? '0' + minute : minute;
 
-    time_element.innerHTML = hours_12hrs_format + ' : ' + minute + ' ' + `<span id="am_pm">${ampm}</span>`;
+    time_element.innerHTML = hours_12hrs_format + ':' + minute + ' ' + `<span id="am_pm">${ampm}</span>`;
     date_element.innerHTML = days[day] + ' , ' + date + ' ' + months[month] ;
 }, 1000);
 
@@ -52,6 +54,8 @@ function showWeatherData(data){
     // ss_mm = ss_mm<10 ? '0' + sr.getMinutes : sr.getMinutes;
      //by default the sunrise and sunset times are in Unix timespam format. x1000 to get the normal time
     //rest is formatting
+    time_zone.innerHTML = data.timezone;
+    country_element.innerHTML = data.lat + 'N ' + data.lon + "E"
 
     current_weather_items_element.innerHTML = `<div class="weather_items">
     <div>Humidity</div>
@@ -72,8 +76,36 @@ function showWeatherData(data){
     <div class="weather_items">
         <div>Sunset</div>
         <div>${ss_hh} : ${ss_mm.substr(-2)} hrs</div>
-    </div>`
+    </div>` ;
     //sunstr(-2) will display only the last 2 string elements hence even when the minutes in 2 digit
     //which will give a string of ( eg : 012) 3 digit, it'll only show the last 2 digits
-    
+
+
+    let otherDayForcast = ' '
+    data.daily.forEach((day,idx)=>{
+        var days = ['Sun', 'Mon' ,'Tue' , 'Wed' , 'Thur' , 'Fri' , 'Sat'];
+        if(idx==0){
+            var date = new Date(day.dt)
+
+            current_temp_element.innerHTML = 
+            `<img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png" alt="weahter icon" class="w_icon">
+            <div class="other">
+                <div class="day">${days[date.getDay()]}</div>
+                <div class="temp">Night - ${day.temp.night}&#176; C</div>
+                <div class="temp">Day - ${day.temp.day}&#176; C</div>
+            </div>`
+        } else {
+            var date = new Date(day.dt)
+
+            otherDayForcast += 
+            `<div class="weather_forecast_item">
+            <div class="day">${days[date.getDay()]}</div>
+            <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weahter icon" class="w_icon">
+            <div class="temp">Night - ${day.temp.night}&#176; C</div>
+            <div class="temp">Day - ${day.temp.day}&#176; C</div>
+            </div>` 
+        }
+    })
+
+    weather_forecast_element.innerHTML = otherDayForcast ;
 }
