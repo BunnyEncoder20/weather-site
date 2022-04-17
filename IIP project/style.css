@@ -60,12 +60,12 @@ body{
     display: flex;
     flex-direction: column;
     background: rgba(24, 24, 27, 0.6);
-    padding: 20px;
+    padding: 17px;
     /* border-width: 10px; */
     border: 1px solid white;
     border-radius: 10px;
     border-color: white;
-    margin: 10px 0px;
+    margin: 16px -18px;
 }
 
 .currentinfo .others .weather_items{
