@@ -28,7 +28,7 @@ body{
 }
 
 .date_container{
-    font-weight: 100;
+    font-weight: 400;
     width: 350px;
 }
 .date_container .time{
@@ -184,14 +184,16 @@ font-weight: 100;
     }
 
     .future_forecast .today {
-        font-size: 12px;
+        font-size: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 1px solid #eee;
+        border: 5px solid rgb(219, 16, 16);
         border-radius: 10px;
         padding:15px;
-        padding-right: 40px;
+        padding-left: 0px;
+        padding-right: 45px;
+        margin-left: 0px;
         border-radius: 10px;
         background: rgba(0,0,0,0.2)
     }
