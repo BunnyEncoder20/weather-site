@@ -90,21 +90,40 @@ function showWeatherData(data){
             current_temp_element.innerHTML = 
             `<img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png" alt="weahter icon" class="w_icon">
             <div class="other">
-                <div class="day">${days[date.getDay()]}</div>
-                <div class="temp">Night - ${day.temp.night}&#176; C</div>
-                <div class="temp">Day - ${day.temp.day}&#176; C</div>
-            </div>`
-        } else {
+                <div class="today_day">${window.moment(day.dt*1000).format('dddd')}</div>
+                <div class="temp">Max - ${day.temp.max}&#176; C</div>
+                <div class="temp">Min - ${day.temp.min}&#176; C</div>
+            </div>` 
+        }
+        else {
             var date = new Date(day.dt)
             console.log(date.getDay());
             otherDayForcast += 
             `<div class="weather_forecast_item">
-            <div class="day">${days[date.getDay()]}</div>
+            <div class="day">${window.moment(day.dt*1000).format('dddd')}</div>
             <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weahter icon" class="w_icon">
-            <div class="temp">Night - ${day.temp.night}&#176; C</div>
-            <div class="temp">Day - ${day.temp.day}&#176; C</div>
+            <div class="temp">Max - ${day.temp.max}&#176; C</div>
+            <div class="temp">Min - ${day.temp.min}&#176; C</div>
             </div>` 
         }
+
+        // if(idx == 0){
+        //     current_temp_element.innerHTML = `<img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@4x.png" alt="weather icon" class="w-icon">
+        //     <div class="other">
+        //         <div class="day">${window.moment(day.dt*1000).format('dddd')}</div>
+        //         <div class="temp">Night - ${day.temp.night}&#176;C</div>
+        //         <div class="temp">Day - ${day.temp.day}&#176;C</div>
+        //     </div>`
+        // } 
+        // else{
+        //     otherDayForcast += `
+        //     <div class="weather-forecast-item">
+        //         <div class="day">${window.moment(day.dt*1000).format('ddd')}</div>
+        //         <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" class="w-icon">
+        //         <div class="temp">Night - ${day.temp.night}&#176;C</div>
+        //         <div class="temp">Day - ${day.temp.day}&#176;C</div>
+        //     </div>`
+        // }
     })
 
     weather_forecast_element.innerHTML = otherDayForcast ;
