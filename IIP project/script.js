@@ -86,7 +86,7 @@ function showWeatherData(data){
         var days = ['Sun', 'Mon' ,'Tue' , 'Wed' , 'Thur' , 'Fri' , 'Sat'];
         if(idx==0){
             var date = new Date(day.dt)
-
+            console.log(date.getDay());
             current_temp_element.innerHTML = 
             `<img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png" alt="weahter icon" class="w_icon">
             <div class="other">
@@ -96,7 +96,7 @@ function showWeatherData(data){
             </div>`
         } else {
             var date = new Date(day.dt)
-
+            console.log(date.getDay());
             otherDayForcast += 
             `<div class="weather_forecast_item">
             <div class="day">${days[date.getDay()]}</div>
