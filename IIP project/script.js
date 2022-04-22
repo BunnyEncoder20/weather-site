@@ -33,7 +33,7 @@ setInterval(() => {
 
 getWeatherData();
 
-
+// calling the API 
 function getWeatherData () {
     navigator.geolocation.getCurrentPosition((success)=>{
         // console.log(success)
@@ -107,18 +107,25 @@ function showWeatherData(data){
             </div>` 
         }
 
-        // if(idx == 0){
+        // var days = ['Sun', 'Mon' ,'Tue' , 'Wed' , 'Thur' , 'Fri' , 'Sat'];
+        //  if(idx == 0){
+        //     const date = new Date();
+        //     day_id = date.getDay();
+        //     day = days[day_id]
         //     current_temp_element.innerHTML = `<img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@4x.png" alt="weather icon" class="w-icon">
         //     <div class="other">
-        //         <div class="day">${window.moment(day.dt*1000).format('dddd')}</div>
+        //         <div class="day">${day}</div>
         //         <div class="temp">Night - ${day.temp.night}&#176;C</div>
         //         <div class="temp">Day - ${day.temp.day}&#176;C</div>
         //     </div>`
         // } 
         // else{
+        //          const date = new Date();
+        //          day_id = date.getDay();
+        //          day = days[day_id]
         //     otherDayForcast += `
         //     <div class="weather-forecast-item">
-        //         <div class="day">${window.moment(day.dt*1000).format('ddd')}</div>
+        //         <div class="day">${day}</div>
         //         <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" class="w-icon">
         //         <div class="temp">Night - ${day.temp.night}&#176;C</div>
         //         <div class="temp">Day - ${day.temp.day}&#176;C</div>
